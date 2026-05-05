@@ -1,44 +1,43 @@
 # 🏋️ GymTracker — Forja tu Legado
 
-GymTracker es una aplicación web (SPA) diseñada para optimizar la constancia deportiva mediante gamificación e Inteligencia Artificial. Este proyecto destaca por una arquitectura segura, una documentación técnica exhaustiva y una interfaz orientada al rendimiento.
+GymTracker es una aplicación web (SPA) diseñada para la gestión del rendimiento deportivo, integrando una interfaz de alta visibilidad y un motor de Inteligencia Artificial para la motivación del usuario.
 
 ## 👥 Equipo y Roles
-*   **@Morritafriki (Stefany)**: Presentación del Proyecto y Gestión de Documentación Técnica.
-*   **@ccarjim2909**: Auditoría de Seguridad y Mitigación de Riesgos.
-*   **@joseeramirezzz**: Desarrollo Backend y Arquitectura de Servidor Proxy.
-*   **@Pablo Malia Gil**: Ingeniería de Prompts y Lógica del Coach IA.
+*   **@Morritafriki**: Presentación del Proyecto, Gestión de Documentación y Control de Calidad.
+*   **@joseeramirezzz**: Arquitectura de Sistemas. Responsable de la reestructuración del núcleo de la página y la supervision de los prompts.
+*   **@ccarjim2909**: Auditoría de Seguridad y detección de vulnerabilidades (XSS).
+*   **@Pablo Malia Gil**: Lógica de Entrenamiento y Experiencia de Usuario.
 
 ---
 
-## 🚀 Funcionalidades Principales
-*   **Gestión de Rachas**: Sistema de seguimiento de días consecutivos de entrenamiento.
-*   **Coach Motivacional**: Integración con IA para generar consejos personalizados basados en el estado del usuario.
-*   **Sistema de Gamificación**: Asignación de puntos y niveles para fomentar la retención del usuario.
-*   **Persistencia Local**: Almacenamiento de datos en el navegador para una carga inmediata.
+## 🚀 ¿Qué hace la aplicación?
+*   **Registro de Constancia**: Permite marcar los días de entrenamiento y visualizar la racha actual.
+*   **Coach Motivacional IA**: Genera consejos personalizados basados en la racha del usuario mediante prompts optimizados.
+*   **Gamificación Local**: Gestiona un sistema de puntos y niveles para incentivar el uso diario.
+*   **Seguridad de Datos**: Protege la integridad de la racha mediante procesos de ofuscación.
 
-## 🛡️ Estándares de Seguridad y Calidad
-Como parte de la gestión de calidad y documentación, se han certificado los siguientes puntos:
-
-1.  **Protección contra XSS**: Se ha auditado el código para eliminar el uso de `innerHTML`, sustituyéndolo por `textContent` y procesos de **sanitización** de datos para prevenir inyecciones maliciosas.
-2.  **Seguridad de Credenciales**: La arquitectura utiliza un **Servidor Proxy** en Node.js. Esto garantiza que la API Key de la IA se gestione mediante variables de entorno (`.env`), evitando su exposición en el lado del cliente.
-3.  **Integridad de Datos**: Los progresos del usuario en el `localStorage` están protegidos mediante **ofuscación Base64**, dificultando la alteración manual de puntos o rachas.
-4.  **Nomenclatura Estandarizada**: Todo el proyecto (IDs, clases, funciones y variables) sigue una convención de nombres en **español** para garantizar la legibilidad y el mantenimiento profesional.
+## 🛑 ¿Qué NO hace la aplicación?
+*   **Persistencia en la Nube**: No utiliza bases de datos externas; los datos se pierden al limpiar la caché del navegador.
+*   **Sincronización Multidispositivo**: Los datos son exclusivos del dispositivo donde se registraron.
+*   **Arquitectura Modular**: Por limitaciones de tiempo, el código no está dividido en subcarpetas, manteniéndose en una estructura monolítica funcional.
 
 ---
 
-## 📥 Ejemplos de Uso (Input/Output)
+## 📥 Ejemplos de Input y Output
 
-| Acción | Input (Entrada) | Output (Salida) |
+| Acción | Input (Entrada de usuario) | Output (Resultado en pantalla) |
 | :--- | :--- | :--- |
-| **Registrar Sesión** | Clic en "Registrar" | Incremento de racha y actualización de nivel en UI. |
-| **Consultar Coach** | Racha de 0 días | *"El primer paso es el más difícil. ¡Empieza hoy!"* |
-| **Almacenamiento** | Datos de usuario | String ofuscado en LocalStorage (Seguridad). |
+| **Registrar Sesión** | Clic en botón "REGISTRAR" | Actualización de racha: "5 días". |
+| **Solicitar Consejo** | Petición con racha de 2 días | *"¡No te detengas ahora! El tercer día es el que marca la diferencia."* |
+| **Guardado de Datos** | Progreso del usuario | String codificado en Base64 en LocalStorage. |
 
 ---
 
-## 🛑 Limitaciones y Alcance
-*   **Ámbito Local**: Los datos se almacenan por dispositivo; no hay sincronización entre diferentes navegadores.
-*   **Dependencia de API**: El funcionamiento del Coach IA requiere conexión activa a internet y configuración del servidor proxy.
+## 🎯 Criterios de Aceptación Cumplidos
+*   **Nomenclatura**: Todo el código (IDs, clases, funciones) utiliza nombres en **español**.
+*   **Seguridad XSS**: Uso de `textContent` para neutralizar inyecciones de código malicioso.
+*   **Precisión de IA**: Prompts ajustados para dar respuestas directas, evitando textos irrelevantes o excesivamente largos.
+*   **Diseño Responsive**: Interfaz adaptada para su uso en dispositivos móviles durante el entrenamiento.
 
 ---
-*Documentación preparada por Stefany para el examen de Desarrollo Web e IA — 2026*
+*Documentación oficial preparada por Stefany para el examen de Desarrollo Web e IA — 2026*
