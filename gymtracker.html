@@ -1209,6 +1209,18 @@
     if (currentUser.name) {
       document.getElementById('username-input').value = currentUser.name;
     }
+
+    // Event listeners seguros para el botón y Enter
+    const usernameBtn = document.getElementById('username-btn');
+    if (usernameBtn) {
+      usernameBtn.addEventListener('click', setUsername);
+    }
+    const usernameInput = document.getElementById('username-input');
+    if (usernameInput) {
+      usernameInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') setUsername();
+      });
+    }
   }
 
   // ¡Arrancamos!
