@@ -1,55 +1,55 @@
 # 🏋️ GymTracker — Forja tu Legado
 
-Este proyecto es una aplicación web de una sola página (SPA) diseñada para la gestión de actividad física y motivación personalizada mediante Inteligencia Artificial. Permite a los usuarios registrar sus entrenamientos, visualizar su progreso mediante un sistema de niveles y puntos, y recibir consejos motivacionales.
+GymTracker es una plataforma web minimalista diseñada para el seguimiento de la constancia deportiva. Combina una interfaz de estilo "Dark Sport" con un motor de Inteligencia Artificial que actúa como coach personal para evitar el absentismo y motivar al atleta.
 
 ## 👥 Equipo y Roles
-*   **@Morritafriki**: Líder de Proyecto, Documentación y Presentación.
-*   **@ccarjim2909**: Seguridad (Gestión de variables de entorno y protección de API Keys).
-*   **@joseeramirezzz**: DevOps y Desarrollo Backend (Servidor Proxy en Node.js).
-*   **@Pablo Malia Gil**: Prompt Engineering (Lógica y personalidad del Coach IA).
+*   **@Morritafriki**: Líder de Proyecto, Documentación y Diseño de Experiencia (UX).
+*   **@ccarjim2909**: Especialista en Ciberseguridad (Auditoría de código y mitigación de riesgos).
+*   **@joseeramirezzz**: Arquitectura Backend y Gestión de Servidores (Proxy API).
+*   **@Pablo Malia Gil**: Ingeniería de Prompts (Personalidad y lógica del Coach IA).
 
 ---
 
 ## 🚀 ¿Qué hace la aplicación?
-*   **Registro de Actividad**: Permite seleccionar distintos tipos de ejercicios (Running, Pesas, HIIT, etc.) y registrar el tiempo invertido.
-*   **Sistema de Gamificación**: Calcula puntos basados en el tipo de ejercicio y la duración, permitiendo al usuario subir de nivel (desde "Novato" hasta "Leyenda").
-*   **Ranking Global**: Clasifica a los usuarios según su puntuación total para fomentar la competitividad sana.
-*   **Historial Local**: Almacena las últimas sesiones realizadas directamente en el navegador.
-*   **Coach Motivacional IA**: Genera consejos personalizados según la racha y el esfuerzo del usuario.
-*   **Sistema de Alerta**: Detecta si el usuario lleva más de 7 días sin entrenar y muestra un aviso visual de "absentismo".
+*   **Registro de Constancia**: Permite al usuario marcar sus días de entrenamiento y visualizar su racha actual.
+*   **Coach Motivacional IA**: Genera consejos personalizados basados en la racha del usuario mediante una conexión segura con modelos de lenguaje.
+*   **Gamificación Local**: Gestiona niveles y puntos de forma persistente en el navegador del usuario.
+*   **Protección de Datos**: Implementa una capa de seguridad para evitar la manipulación de progresos.
 
 ## 🛑 ¿Qué NO hace?
-*   **Persistencia en Base de Datos**: Los datos se guardan en el `localStorage` del navegador; si se borra la caché o se cambia de dispositivo, los datos se reinician.
-*   **Autenticación Multidispositivo**: No requiere registro con correo o contraseña, se basa en un perfil de usuario local.
-*   **Sincronización en Tiempo Real**: El ranking es una simulación basada en datos locales y usuarios de demostración.
+*   **Base de Datos Centralizada**: No utiliza SQL; los datos se guardan en el `localStorage` del navegador (se pierden si se limpia la caché).
+*   **Multiusuario**: Está diseñada para un perfil único por dispositivo.
+*   **Seguimiento por GPS**: La actividad se registra de forma manual, no mediante sensores del móvil.
 
 ---
 
-## 🎯 Criterios de Aceptación
-1.  **Seguridad de API**: La API Key de la IA nunca se expone en el código cliente (Frontend). Todas las llamadas pasan por un servidor seguro.
-2.  **Nomenclatura Estándar**: Todas las variables, IDs, clases CSS y funciones de JavaScript utilizan nombres en **español**.
-3.  **Interfaz Responsiva**: La web es totalmente funcional tanto en dispositivos móviles como en ordenadores.
-4.  **Optimización de Archivos**: Proyecto ejecutado en una única página HTML y un único servidor compartido.
+## 🛡️ Criterios de Seguridad Aplicados
+Tras la auditoría interna, el proyecto cumple con los siguientes estándares de seguridad:
+
+1.  **Prevención de XSS (Cross-Site Scripting)**: Se ha eliminado el uso de `innerHTML` en el renderizado de datos dinámicos, sustituyéndolo por `textContent` y funciones de sanitización de cadenas.
+2.  **Seguridad de API (Zero-Exposure)**: La API Key nunca reside en el cliente. Se utiliza un servidor proxy en Node.js que gestiona las credenciales mediante variables de entorno (`.env`).
+3.  **Integridad de LocalStorage**: Los datos se almacenan bajo una capa de **ofuscación Base64** para dificultar la manipulación de valores (puntos/rachas) desde la consola del desarrollador.
+4.  **Content Security Policy (CSP)**: Se incluye una directiva de seguridad en el encabezado para restringir la carga de scripts externos no autorizados.
 
 ---
 
-## 📥 Ejemplos de Input / Output
+## 📥 Ejemplos de Input y Output
 
-### 1. Registro de Entrenamiento
-*   **Input (Entrada)**: Selección de "HIIT" (multiplicador x5) + Duración: 20 minutos.
-*   **Acción**: El usuario pulsa "Registrar Sesión".
-*   **Output (Salida)**: Se suman 100 puntos al perfil, la barra de nivel progresa y aparece un "Toast" de éxito con el mensaje "¡SESIÓN REGISTRADA! 💥".
+### 1. Registro de Sesión
+*   **Input**: El usuario pulsa el botón "REGISTRAR SESIÓN".
+*   **Output**: La interfaz se actualiza instantáneamente: *"Racha actual: 5 días"*. Internamente, el valor se guarda codificado.
 
 ### 2. Consulta al Coach IA
-*   **Input (Entrada)**: El sistema detecta una racha de 0 días (usuario inactivo).
-*   **Acción**: El usuario pulsa "Obtener Consejo del Coach".
-*   **Output (Salida)**: "El primer paso es el más difícil, Atleta. Ponte las zapatillas y solo camina 10 minutos hoy. ¡Mañana me lo agradecerás!"
+*   **Input**: Petición de consejo con una racha de 0 días.
+*   **Acción**: El servidor envía el contexto de racha al modelo de IA.
+*   **Output**: *"El éxito es la suma de pequeños esfuerzos repetidos día tras día. ¡Empieza hoy con 15 minutos!"*
 
 ---
 
-## ⚙️ Instalación y Uso Local
-1. Clonar el repositorio: `git clone https://github.com/Morritafriki/PROYECTO-DESARROLLO-IA.git`
-2. Instalar dependencias: `npm install`
-3. Configurar el archivo `.env` con la `API_KEY` correspondiente.
-4. Iniciar el servidor: `node servidor.js`
-5. Abrir `http://localhost:3000` en el navegador.
+## 🎯 Criterios de Aceptación Técnicos
+*   **Nomenclatura**: Todo el código (IDs, clases, funciones y variables) sigue el estándar de nombres en **español**.
+*   **Responsive**: La interfaz es adaptable a dispositivos móviles y escritorio.
+*   **Optimización**: El frontend es una SPA (Single Page Application) ligera y de carga rápida.
+
+---
+*Proyecto final realizado para el curso de Desarrollo Web e IA — Mayo 2026*
